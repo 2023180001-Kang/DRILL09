@@ -6,7 +6,7 @@ FRAME_WIDTH, FRAME_HEIGHT = 100, 100
 
 
 open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
-grass = load_image('grass.png')
+background = load_image('TUK_GROUND.png')
 character = load_image('animation_sheet.png')
 
 
@@ -41,7 +41,7 @@ dir = 0 # 정지 상태
 # fill here
 while running:
     clear_canvas()
-    grass.draw(400, 30)
+    background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
     character.clip_draw(frame * FRAME_WIDTH, 100, FRAME_WIDTH, FRAME_HEIGHT, x, 90)
     update_canvas()
     handle_events()
