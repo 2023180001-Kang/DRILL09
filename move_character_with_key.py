@@ -9,6 +9,12 @@ CHARACTER_SHEET_FILE = 'animation_sheet.png'
 open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
 background = load_image('TUK_GROUND.png')
 character = load_image(CHARACTER_SHEET_FILE)
+key_state = {
+    SDLK_RIGHT: False,
+    SDLK_LEFT: False,
+    SDLK_UP: False,
+    SDLK_DOWN: False,
+}
 
 
 def handle_events():
@@ -18,8 +24,13 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             running = False
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            running = False
+        elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_ESCAPE:
+                running = False
+            elif event.key in key_state:
+                key_state[event.key] = True
+        elif event.type == SDL_KEYUP and event.key in key_state:
+            key_state[event.key] = False
 running = True
 x, y = CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2
 frame = 0
