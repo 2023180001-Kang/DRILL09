@@ -71,13 +71,14 @@ while running:
     update_canvas()
     handle_events()
     frame = (frame + 1) % FRAME_COUNT
+    old_x, old_y = x, y
     horizontal = int(key_state[SDLK_RIGHT]) - int(key_state[SDLK_LEFT])
     vertical = int(key_state[SDLK_UP]) - int(key_state[SDLK_DOWN])
     x += horizontal * MOVE_SPEED
     y += vertical * MOVE_SPEED
     x = max(MIN_X, min(MAX_X, x))
     y = max(MIN_Y, min(MAX_Y, y))
-    state = STATE_MOVE if horizontal != 0 or vertical != 0 else STATE_IDLE
+    state = STATE_MOVE if x != old_x or y != old_y else STATE_IDLE
     delay(FRAME_DELAY)
 
 close_canvas()
