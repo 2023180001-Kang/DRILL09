@@ -37,9 +37,11 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             running = False
+            return
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE:
                 running = False
+                return
             elif event.key in key_state:
                 key_state[event.key] = True
                 # Up/down movement keeps the existing left/right facing direction.
@@ -70,6 +72,8 @@ while running:
     character.clip_draw(frame * FRAME_WIDTH, row_y, FRAME_WIDTH, FRAME_HEIGHT, x, y)
     update_canvas()
     handle_events()
+    if not running:
+        break
     frame = (frame + 1) % FRAME_COUNT
     old_x, old_y = x, y
     horizontal = int(key_state[SDLK_RIGHT]) - int(key_state[SDLK_LEFT])
