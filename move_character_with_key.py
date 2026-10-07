@@ -35,7 +35,7 @@ def handle_events():
             elif event.key == SDLK_LEFT:
                 dir += 1
 running = True
-x = CANVAS_WIDTH // 2
+x, y = CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2
 frame = 0
 dir = 0 # 정지 상태
 
@@ -43,7 +43,7 @@ dir = 0 # 정지 상태
 while running:
     clear_canvas()
     background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
-    character.clip_draw(frame * FRAME_WIDTH, 100, FRAME_WIDTH, FRAME_HEIGHT, x, 90)
+    character.clip_draw(frame * FRAME_WIDTH, 100, FRAME_WIDTH, FRAME_HEIGHT, x, y)
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
