@@ -3,11 +3,12 @@ from pico2d import *
 
 CANVAS_WIDTH, CANVAS_HEIGHT = 1280, 1024
 FRAME_WIDTH, FRAME_HEIGHT = 100, 100
+CHARACTER_SHEET_FILE = 'animation_sheet.png'
 
 
 open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
 background = load_image('TUK_GROUND.png')
-character = load_image('animation_sheet.png')
+character = load_image(CHARACTER_SHEET_FILE)
 
 
 def handle_events():
