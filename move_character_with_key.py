@@ -48,6 +48,10 @@ while running:
         x += MOVE_SPEED
     if key_state[SDLK_LEFT]:
         x -= MOVE_SPEED
+    if key_state[SDLK_UP]:
+        y += MOVE_SPEED
+    if key_state[SDLK_DOWN]:
+        y -= MOVE_SPEED
     delay(0.05)
 
 close_canvas()
