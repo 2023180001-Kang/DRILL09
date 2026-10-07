@@ -3,6 +3,8 @@ from pico2d import *
 
 CANVAS_WIDTH, CANVAS_HEIGHT = 1280, 1024
 FRAME_WIDTH, FRAME_HEIGHT = 100, 100
+FRAME_COUNT = 8
+FRAME_DELAY = 0.05
 MOVE_SPEED = 5
 CHARACTER_SHEET_FILE = 'animation_sheet.png'
 FACE_RIGHT = 'right'
@@ -66,13 +68,13 @@ while running:
     character.clip_draw(frame * FRAME_WIDTH, row_y, FRAME_WIDTH, FRAME_HEIGHT, x, y)
     update_canvas()
     handle_events()
-    frame = (frame + 1) % 8
+    frame = (frame + 1) % FRAME_COUNT
     horizontal = int(key_state[SDLK_RIGHT]) - int(key_state[SDLK_LEFT])
     vertical = int(key_state[SDLK_UP]) - int(key_state[SDLK_DOWN])
     x += horizontal * MOVE_SPEED
     y += vertical * MOVE_SPEED
     state = STATE_MOVE if horizontal != 0 or vertical != 0 else STATE_IDLE
-    delay(0.05)
+    delay(FRAME_DELAY)
 
 close_canvas()
 
