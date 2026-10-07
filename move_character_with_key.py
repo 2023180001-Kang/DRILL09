@@ -5,6 +5,8 @@ CANVAS_WIDTH, CANVAS_HEIGHT = 1280, 1024
 FRAME_WIDTH, FRAME_HEIGHT = 100, 100
 MOVE_SPEED = 5
 CHARACTER_SHEET_FILE = 'animation_sheet.png'
+FACE_RIGHT = 'right'
+FACE_LEFT = 'left'
 
 
 open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
@@ -19,7 +21,7 @@ key_state = {
 
 
 def handle_events():
-    global running
+    global running, facing
 
     events = get_events()
     for event in events:
@@ -30,11 +32,16 @@ def handle_events():
                 running = False
             elif event.key in key_state:
                 key_state[event.key] = True
+                if event.key == SDLK_RIGHT:
+                    facing = FACE_RIGHT
+                elif event.key == SDLK_LEFT:
+                    facing = FACE_LEFT
         elif event.type == SDL_KEYUP and event.key in key_state:
             key_state[event.key] = False
 running = True
 x, y = CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2
 frame = 0
+facing = FACE_RIGHT
 
 # fill here
 while running:
