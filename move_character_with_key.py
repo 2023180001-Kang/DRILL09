@@ -7,6 +7,8 @@ MOVE_SPEED = 5
 CHARACTER_SHEET_FILE = 'animation_sheet.png'
 FACE_RIGHT = 'right'
 FACE_LEFT = 'left'
+STATE_IDLE = 'IDLE'
+STATE_MOVE = 'MOVE'
 
 
 open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
@@ -47,6 +49,7 @@ running = True
 x, y = CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2
 frame = 0
 facing = FACE_RIGHT
+state = STATE_IDLE
 
 # fill here
 while running:
@@ -60,6 +63,7 @@ while running:
     vertical = int(key_state[SDLK_UP]) - int(key_state[SDLK_DOWN])
     x += horizontal * MOVE_SPEED
     y += vertical * MOVE_SPEED
+    state = STATE_MOVE if horizontal != 0 or vertical != 0 else STATE_IDLE
     delay(0.05)
 
 close_canvas()
