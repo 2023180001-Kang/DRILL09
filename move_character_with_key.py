@@ -1,6 +1,10 @@
 from pico2d import *
 
 
+CANVAS_WIDTH, CANVAS_HEIGHT = 800, 600
+FRAME_WIDTH, FRAME_HEIGHT = 100, 100
+
+
 open_canvas()
 grass = load_image('grass.png')
 character = load_image('animation_sheet.png')
@@ -30,7 +34,7 @@ def handle_events():
             elif event.key == SDLK_LEFT:
                 dir += 1
 running = True
-x = 800 // 2
+x = CANVAS_WIDTH // 2
 frame = 0
 dir = 0 # 정지 상태
 
@@ -38,7 +42,7 @@ dir = 0 # 정지 상태
 while running:
     clear_canvas()
     grass.draw(400, 30)
-    character.clip_draw(frame*100, 100, 100, 100, x, 90)
+    character.clip_draw(frame * FRAME_WIDTH, 100, FRAME_WIDTH, FRAME_HEIGHT, x, 90)
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
