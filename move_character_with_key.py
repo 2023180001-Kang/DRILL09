@@ -13,27 +13,13 @@ character = load_image(CHARACTER_SHEET_FILE)
 
 def handle_events():
     global running
-    global x
-    global dir
-    # fill here
-    
+
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             running = False
-        # fill here
-        elif event.type == SDL_KEYDOWN:
-            if event.key == SDLK_RIGHT:
-                dir += 1
-            elif event.key == SDLK_LEFT:
-                dir -= 1
-            elif event.key == SDLK_ESCAPE:
-                running = False
-        elif event.type == SDL_KEYUP:
-            if event.key == SDLK_RIGHT:
-                dir -= 1
-            elif event.key == SDLK_LEFT:
-                dir += 1
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            running = False
 running = True
 x, y = CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2
 frame = 0
