@@ -55,26 +55,19 @@ def handle_events():
                 facing = FACE_LEFT
             elif event.key == SDLK_LEFT and key_state[SDLK_RIGHT]:
                 facing = FACE_RIGHT
+
+
 running = True
 x, y = CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2
 frame = 0
 facing = FACE_RIGHT
 state = STATE_IDLE
 
-# fill here
 while running:
-    clear_canvas()
-    background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
-    if state == STATE_IDLE:
-        row_y = IDLE_RIGHT_Y if facing == FACE_RIGHT else IDLE_LEFT_Y
-    else:
-        row_y = MOVE_RIGHT_Y if facing == FACE_RIGHT else MOVE_LEFT_Y
-    character.clip_draw(frame * FRAME_WIDTH, row_y, FRAME_WIDTH, FRAME_HEIGHT, x, y)
-    update_canvas()
     handle_events()
     if not running:
         break
-    frame = (frame + 1) % FRAME_COUNT
+
     old_x, old_y = x, y
     horizontal = int(key_state[SDLK_RIGHT]) - int(key_state[SDLK_LEFT])
     vertical = int(key_state[SDLK_UP]) - int(key_state[SDLK_DOWN])
@@ -83,6 +76,16 @@ while running:
     x = max(MIN_X, min(MAX_X, x))
     y = max(MIN_Y, min(MAX_Y, y))
     state = STATE_MOVE if x != old_x or y != old_y else STATE_IDLE
+
+    clear_canvas()
+    background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
+    if state == STATE_IDLE:
+        row_y = IDLE_RIGHT_Y if facing == FACE_RIGHT else IDLE_LEFT_Y
+    else:
+        row_y = MOVE_RIGHT_Y if facing == FACE_RIGHT else MOVE_LEFT_Y
+    character.clip_draw(frame * FRAME_WIDTH, row_y, FRAME_WIDTH, FRAME_HEIGHT, x, y)
+    update_canvas()
+    frame = (frame + 1) % FRAME_COUNT
     delay(FRAME_DELAY)
 
 close_canvas()
