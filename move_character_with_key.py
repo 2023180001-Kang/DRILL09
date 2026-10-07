@@ -9,6 +9,8 @@ FACE_RIGHT = 'right'
 FACE_LEFT = 'left'
 STATE_IDLE = 'IDLE'
 STATE_MOVE = 'MOVE'
+IDLE_RIGHT_Y = 300
+IDLE_LEFT_Y = 200
 
 
 open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
@@ -55,7 +57,10 @@ state = STATE_IDLE
 while running:
     clear_canvas()
     background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
-    character.clip_draw(frame * FRAME_WIDTH, 100, FRAME_WIDTH, FRAME_HEIGHT, x, y)
+    row_y = 100
+    if state == STATE_IDLE:
+        row_y = IDLE_RIGHT_Y if facing == FACE_RIGHT else IDLE_LEFT_Y
+    character.clip_draw(frame * FRAME_WIDTH, row_y, FRAME_WIDTH, FRAME_HEIGHT, x, y)
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
