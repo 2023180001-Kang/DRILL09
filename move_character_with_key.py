@@ -44,14 +44,10 @@ while running:
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
-    if key_state[SDLK_RIGHT]:
-        x += MOVE_SPEED
-    if key_state[SDLK_LEFT]:
-        x -= MOVE_SPEED
-    if key_state[SDLK_UP]:
-        y += MOVE_SPEED
-    if key_state[SDLK_DOWN]:
-        y -= MOVE_SPEED
+    horizontal = int(key_state[SDLK_RIGHT]) - int(key_state[SDLK_LEFT])
+    vertical = int(key_state[SDLK_UP]) - int(key_state[SDLK_DOWN])
+    x += horizontal * MOVE_SPEED
+    y += vertical * MOVE_SPEED
     delay(0.05)
 
 close_canvas()
