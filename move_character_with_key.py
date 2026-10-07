@@ -32,12 +32,17 @@ def handle_events():
                 running = False
             elif event.key in key_state:
                 key_state[event.key] = True
+                # Up/down movement keeps the existing left/right facing direction.
                 if event.key == SDLK_RIGHT:
                     facing = FACE_RIGHT
                 elif event.key == SDLK_LEFT:
                     facing = FACE_LEFT
         elif event.type == SDL_KEYUP and event.key in key_state:
             key_state[event.key] = False
+            if event.key == SDLK_RIGHT and key_state[SDLK_LEFT]:
+                facing = FACE_LEFT
+            elif event.key == SDLK_LEFT and key_state[SDLK_RIGHT]:
+                facing = FACE_RIGHT
 running = True
 x, y = CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2
 frame = 0
