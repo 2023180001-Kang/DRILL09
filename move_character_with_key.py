@@ -6,6 +6,8 @@ FRAME_WIDTH, FRAME_HEIGHT = 100, 100
 FRAME_COUNT = 8
 FRAME_DELAY = 0.05
 MOVE_SPEED = 5
+MIN_X, MAX_X = FRAME_WIDTH // 2, CANVAS_WIDTH - FRAME_WIDTH // 2
+MIN_Y, MAX_Y = FRAME_HEIGHT // 2, CANVAS_HEIGHT - FRAME_HEIGHT // 2
 CHARACTER_SHEET_FILE = 'animation_sheet.png'
 FACE_RIGHT = 'right'
 FACE_LEFT = 'left'
@@ -73,6 +75,8 @@ while running:
     vertical = int(key_state[SDLK_UP]) - int(key_state[SDLK_DOWN])
     x += horizontal * MOVE_SPEED
     y += vertical * MOVE_SPEED
+    x = max(MIN_X, min(MAX_X, x))
+    y = max(MIN_Y, min(MAX_Y, y))
     state = STATE_MOVE if horizontal != 0 or vertical != 0 else STATE_IDLE
     delay(FRAME_DELAY)
 
