@@ -3,6 +3,7 @@ from pico2d import *
 
 CANVAS_WIDTH, CANVAS_HEIGHT = 1280, 1024
 FRAME_WIDTH, FRAME_HEIGHT = 100, 100
+MOVE_SPEED = 5
 CHARACTER_SHEET_FILE = 'animation_sheet.png'
 
 
@@ -34,7 +35,6 @@ def handle_events():
 running = True
 x, y = CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2
 frame = 0
-dir = 0 # 정지 상태
 
 # fill here
 while running:
@@ -44,7 +44,10 @@ while running:
     update_canvas()
     handle_events()
     frame = (frame + 1) % 8
-    x += dir * 5
+    if key_state[SDLK_RIGHT]:
+        x += MOVE_SPEED
+    if key_state[SDLK_LEFT]:
+        x -= MOVE_SPEED
     delay(0.05)
 
 close_canvas()
